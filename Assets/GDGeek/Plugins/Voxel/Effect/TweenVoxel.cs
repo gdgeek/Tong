@@ -53,7 +53,7 @@ namespace GDGeek{
 
 			} }
 
-		override protected void OnUpdate (float factor, bool isFinished){
+		override protected void onUpdate (float factor, bool isFinished){
 			property = from.mul(1f - factor).add(to.mul(factor));
 		}
 
@@ -69,7 +69,7 @@ namespace GDGeek{
 
 			if (duration <= 0f)
 			{
-				tween.Sample(1f, true);
+				tween.sample(1f, true);
 				tween.enabled = false;
 			}
 			return tween;

@@ -1,11 +1,11 @@
-/*-----------------------------------------------------------------------------
+﻿/*-----------------------------------------------------------------------------
 The MIT License (MIT)
 
 This source file is part of GDGeek
     (Game Develop & Game Engine Extendable Kits)
 For the latest info, see http://gdgeek.com/
 
-Copyright (c) 2014-2015 GDGeek Software Ltd
+Copyright (c) 2014-2021 GDGeek Software Ltd
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,61 +32,61 @@ using UnityEngine;
 /// Implements common functionality for monobehaviours that wish to have a timeScale-independent deltaTime.
 /// </summary>
 namespace GDGeek{
-public class IgnoreTimeScale : MonoBehaviour
-{
-	float mRt = 0f;
-	float mTimeStart = 0f;
-	float mTimeDelta = 0f;
-	float mActual = 0f;
-	bool mTimeStarted = false;
+    public class IgnoreTimeScale : MonoBehaviour
+    {
+	    float mRt = 0f;
+	    float mTimeStart = 0f;
+	    float mTimeDelta = 0f;
+	    float mActual = 0f;
+	    bool mTimeStarted = false;
 
-	/// <summary>
-	/// Real time of the last time UpdateRealTimeDelta() was called.
-	/// </summary>
+	    /// <summary>
+	    /// Real time of the last time UpdateRealTimeDelta() was called.
+	    /// </summary>
 
-	public float realTime { get { return mRt; } }
+	    public float realTime { get { return mRt; } }
 
-	/// <summary>
-	/// Equivalent of Time.deltaTime not affected by timeScale, provided that UpdateRealTimeDelta() was called in the Update().
-	/// </summary>
+	    /// <summary>
+	    /// Equivalent of Time.deltaTime not affected by timeScale, provided that UpdateRealTimeDelta() was called in the Update().
+	    /// </summary>
 
-	public float realTimeDelta { get { return mTimeDelta; } }
+	    public float realTimeDelta { get { return mTimeDelta; } }
 
-	/// <summary>
-	/// Clear the started flag;
-	/// </summary>
+	    /// <summary>
+	    /// Clear the started flag;
+	    /// </summary>
 
-	protected virtual void OnEnable ()
-	{
-		mTimeStarted = true;
-		mTimeDelta = 0f;
-		mTimeStart = Time.realtimeSinceStartup;
-	}
+	    protected virtual void OnEnable ()
+	    {
+		    mTimeStarted = true;
+		    mTimeDelta = 0f;
+		    mTimeStart = Time.realtimeSinceStartup;
+	    }
 
-	/// <summary>
-	/// Update the 'realTimeDelta' parameter. Should be called once per frame.
-	/// </summary>
+	    /// <summary>
+	    /// Update the 'realTimeDelta' parameter. Should be called once per frame.
+	    /// </summary>
 
-	protected float UpdateRealTimeDelta ()
-	{
-		mRt = Time.realtimeSinceStartup;
+	    protected float UpdateRealTimeDelta ()
+	    {
+		    mRt = Time.realtimeSinceStartup;
 
-		if (mTimeStarted)
-		{
-			float delta = mRt - mTimeStart;
-			mActual += Mathf.Max(0f, delta);
-			mTimeDelta = 0.001f * Mathf.Round(mActual * 1000f);
-			mActual -= mTimeDelta;
-			if (mTimeDelta > 1f) mTimeDelta = 1f;
-			mTimeStart = mRt;
-		}
-		else
-		{
-			mTimeStarted = true;
-			mTimeStart = mRt;
-			mTimeDelta = 0f;
-		}
-		return mTimeDelta;
-	}
-}
+		    if (mTimeStarted)
+		    {
+			    float delta = mRt - mTimeStart;
+			    mActual += Mathf.Max(0f, delta);
+			    mTimeDelta = 0.001f * Mathf.Round(mActual * 1000f);
+			    mActual -= mTimeDelta;
+			    if (mTimeDelta > 1f) mTimeDelta = 1f;
+			    mTimeStart = mRt;
+		    }
+		    else
+		    {
+			    mTimeStarted = true;
+			    mTimeStart = mRt;
+			    mTimeDelta = 0f;
+		    }
+		    return mTimeDelta;
+	    }
+    }
 }

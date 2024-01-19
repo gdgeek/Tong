@@ -9,7 +9,7 @@ public class GameView : Singleton<GameView> {
 	public LogoTouch _logo = null;
     public Task open()
     {
-        TaskTween tt = new TaskTween(delegate () {
+	    TweenTask tt = new TweenTask(delegate () {
             return TweenRotation.Begin(_axis, 1.3f, Quaternion.AngleAxis(180, Vector3.left));
         });
         TaskManager.PushFront(tt, delegate () {
@@ -21,7 +21,7 @@ public class GameView : Singleton<GameView> {
 
     public Task roundOver(float time = 1.3f)
     {
-        TaskTween tt = new TaskTween(delegate () {
+	    TweenTask tt = new TweenTask(delegate () {
             return TweenRotation.Begin(_offset, time, Quaternion.AngleAxis(0, Vector3.left));
         });
         TaskManager.PushFront(tt, delegate () {
@@ -33,7 +33,7 @@ public class GameView : Singleton<GameView> {
         return tt;
     }
     public Task round(float time = 1.3f){
-		TaskTween tt = new TaskTween (delegate() {
+	    TweenTask tt = new TweenTask (delegate() {
 			return TweenRotation.Begin(_offset, time, Quaternion.AngleAxis(180, Vector3.right));
 		});
 		TaskManager.PushFront (tt, delegate() {
@@ -44,7 +44,7 @@ public class GameView : Singleton<GameView> {
 		return tt;
 	}
 	public Task close(){
-		TaskTween tt = new TaskTween (delegate() {
+		TweenTask tt = new TweenTask (delegate() {
 			return TweenRotation.Begin(_axis, 1.3f, Quaternion.AngleAxis(0, Vector3.left));
 		});
 		TaskManager.PushFront (tt, delegate() {

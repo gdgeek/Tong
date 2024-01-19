@@ -1,6 +1,8 @@
 ﻿
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 /*-----------------------------------------------------------------------------
 The MIT License (MIT)
@@ -9,7 +11,7 @@ This source file is part of GDGeek
     (Game Develop & Game Engine Extendable Kits)
 For the latest info, see http://gdgeek.com/
 
-Copyright (c) 2014-2015 GDGeek Software Ltd
+Copyright (c) 2014-2021 GDGeek Software Ltd
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,14 +34,11 @@ THE SOFTWARE.
 */
 
 namespace GDGeek{
-	public class LoadingWindow : MonoBehaviour {
+	public class LoadingWindow : Singleton<LoadingWindow> {
 		public CanvasGroup _cg = null;
-	//	public EventSystem _evtSys = null; 
+	
 		public float _wait = 0.3f;
-		public void Awake(){
-			//this.gameObject.SetActive(false);
-			//_evtSys.StopCoroutine(
-		}
+        
 		private Task packTask(Task task){
 			Task pack = new Task();
 			float allTime = 0.0f;
@@ -103,10 +102,11 @@ namespace GDGeek{
 			return tl;
 		}
 		private Task show(){
-			TaskTween task = new TaskTween (
+			TweenTask task = new TweenTask (
 				delegate{
 					this.gameObject.SetActive(true);
-					TweenGroupAlpha alpha = TweenGroupAlpha.Begin(this.gameObject,0.3f, 1.0f);
+					TweenCanvasGroupAlpha alpha = TweenCanvasGroupAlpha.Begin(this.gameObject,0.3f, 1.0f);
+					alpha.cachedGroup = _cg;
 					return alpha;
 				}
 			);
@@ -116,9 +116,10 @@ namespace GDGeek{
 			return task;
 		}
 		private Task hide(){
-			TaskTween task = new TaskTween (
+			TweenTask task = new TweenTask
+				(
 				delegate{
-				TweenGroupAlpha alpha = TweenGroupAlpha.Begin(this.gameObject,0.15f, 0.0f);
+				TweenCanvasGroupAlpha alpha = TweenCanvasGroupAlpha.Begin(this.gameObject,0.15f, 0.0f);
 				return alpha;
 			}
 			);
@@ -127,8 +128,6 @@ namespace GDGeek{
 
 			TaskManager.PushBack (task, delegate {
 				if(_cg != null) _cg.alpha = 0.0f;
-				//Debug.LogError("????");
-			//	if(_evtSys != null) _evtSys.enabled = true;
 				if(this != null && this.gameObject != null) this.gameObject.SetActive(false);
 			});
 			return task;

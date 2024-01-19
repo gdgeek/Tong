@@ -24,7 +24,7 @@ public class PlayView : Singleton<PlayView> {
 
     public Task close(float time = 1.3f) {
         float w = 0;
-        TaskTween tt = new TaskTween(delegate () {
+        TweenTask tt = new TweenTask(delegate () {
             return TweenRotation.Begin(_offset, time, Quaternion.AngleAxis(w, Vector3.right));
         });
         TaskManager.PushFront(tt, delegate () {
@@ -56,7 +56,7 @@ public class PlayView : Singleton<PlayView> {
 	public Task open(float time = 1.3f){
 
 		float w = 0;
-		TaskTween tt = new TaskTween (delegate() {
+		TweenTask tt = new TweenTask (delegate() {
 			return TweenRotation.Begin(_offset, time, Quaternion.AngleAxis(w, Vector3.right));
 		});
 		TaskManager.PushFront (tt, delegate() {

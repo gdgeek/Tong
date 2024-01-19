@@ -56,11 +56,11 @@ public class MainLogic : MonoBehaviour {
         state.addAction("logotouch", "logo_loading");
         return state;
     }
+    public void post(string msg) {
+		fsm_.post(msg);
+	}
 	public void Start(){
-        GameView.Instance._logo.onEnter += delegate
-        {
-            fsm_.post("logotouch");
-        };
+       
 		this._logo = new LogoLogic (fsm_, "play_loading");
 		this._play = new PlayLogic (fsm_, "end");
 

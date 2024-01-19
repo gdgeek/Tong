@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class LogoTouch : MonoBehaviour {
     public LogoInput _input;
@@ -10,8 +11,9 @@ public class LogoTouch : MonoBehaviour {
 
     public delegate void Function();
 
-
-    public event Function onEnter;
+    [SerializeField]
+    private UnityEvent _onEnter;
+   // public event Function onEnter_;
     // Use this for initialization
     void Start () {
         _input.onMouseEnter += delegate
@@ -22,10 +24,8 @@ public class LogoTouch : MonoBehaviour {
 
         _input.onMouseClick += delegate
         {
-            if (onEnter != null)
-            {
-                onEnter();
-            }
+            _onEnter?.Invoke();
+           
         };
 
         _input.onMouseExit += delegate
@@ -42,9 +42,7 @@ public class LogoTouch : MonoBehaviour {
             time_ += Time.deltaTime;
             if (time_ > _allTime) {
                 enable_ = false;
-                if(onEnter != null){
-                    onEnter();
-                }
+                _onEnter?.Invoke();
 
             }
         }

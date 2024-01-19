@@ -21,22 +21,22 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Diff
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 416ec3e99ad1b4e7782c87ead63571a4,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
-  - _EMISSION
+  - _RECEIVE_SHADOWS_OFF
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3050
+  m_CustomRenderQueue: 5000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
-  - DepthOnly
   - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
@@ -114,6 +114,7 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _CastShadows: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ColorMask: 15
@@ -132,8 +133,9 @@ Material:
     - _Mode: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _QueueControl: 1
     - _QueueOffset: 50
-    - _ReceiveShadows: 1
+    - _ReceiveShadows: 0
     - _Shininess: 0.2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -149,12 +151,14 @@ Material:
     - _UVSec: 0
     - _UseUIAlphaClip: 0
     - _WorkflowMode: 1
-    - _ZWrite: 0
+    - _ZTest: 3
+    - _ZWrite: 1
+    - _ZWriteControl: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.9234316, b: 0.033018887, a: 0}
-    - _Color: {r: 1, g: 0.9234316, b: 0.033018887, a: 0}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
     - _ColorTint: {r: 0.388416, g: 0.672, b: 0.5290737, a: 0.534}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.2735849, g: 0.21460728, b: 0.011614448, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

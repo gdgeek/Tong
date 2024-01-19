@@ -5,7 +5,7 @@ This source file is part of GDGeek
     (Game Develop & Game Engine Extendable Kits)
 For the latest info, see http://gdgeek.com/
 
-Copyright (c) 2014-2015 GDGeek Software Ltd
+Copyright (c) 2014-2021 GDGeek Software Ltd
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,23 +29,39 @@ THE SOFTWARE.
 
 using UnityEngine;
 using System.Collections;
+using System;
+
 namespace GDGeek{
-	public class TaskTween : Task{
+	public class TweenTask : Task {
 
-		public delegate Tween Maker();
+		public static new TweenTask T
+		{
+			get => new TweenTask();
+		}
 
-		public TaskTween(Maker maker){
+
+
+		public TweenTask() { }
+		public TweenTask setup(Func<Tween> maker) {
 			Tween gw = null;
-			this.init =  delegate {
+
+
+			this.pushFront(()=> {
 				gw = maker();
-			};
-			this.isOver = delegate {
-				if(gw && gw.enabled){
+			}).addisOver(()=> {
+				if (gw && gw.enabled)
+				{
 					return false;
-				}else{
-					return true;
 				}
-			};
+				
+				return true;
+				
+			});
+
+			return this;
+		}
+		public TweenTask(Func<Tween> maker){
+			setup(maker);
 		}
 
 

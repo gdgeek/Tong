@@ -12,6 +12,7 @@ public class Different : MonoBehaviour {
 
 
 	public void setAlpha(float alpha){
+		Debug.LogError("!!!!!");
 		Renderer renderer = this.gameObject.GetComponent<Renderer> ();
 
 		Color color = renderer.material.color;

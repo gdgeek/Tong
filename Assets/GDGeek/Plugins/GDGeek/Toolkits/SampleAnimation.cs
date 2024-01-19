@@ -5,7 +5,7 @@ This source file is part of GDGeek
     (Game Develop & Game Engine Extendable Kits)
 For the latest info, see http://gdgeek.com/
 
-Copyright (c) 2014-2015 GDGeek Software Ltd
+Copyright (c) 2014-2021 GDGeek Software Ltd
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,16 +27,17 @@ THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 namespace GDGeek{
 	public class SampleAnimation : MonoBehaviour {
-		//public Image _image = null;
+		public Image _image = null;
 		public Sprite[] _sprites = null;
 		public float _interval = 1.0f;
 		private float allTime_ = 0;
 		private int index_ = 0;
 		// Update is called once per frame
-		/*void Update () {
+		void Update () {
 			allTime_ += Time.deltaTime;
 			while (allTime_ > _interval) {
 				allTime_-=	_interval;
@@ -44,6 +45,6 @@ namespace GDGeek{
 				index_ %= _sprites.Length;
 				_image.sprite = _sprites[index_];
 			}
-		}*/
+		}
 	}
 }

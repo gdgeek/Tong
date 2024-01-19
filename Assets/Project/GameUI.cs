@@ -11,8 +11,8 @@ public class GameUI : MonoBehaviour {
 
     public Task closeUI()
     {
-        TaskTween tt = new TaskTween(delegate () {
-            return TweenLocalPosition.Begin(this.gameObject, 1.3f, new Vector3(2, -55, 47));
+	    TweenTask tt = new TweenTask(delegate () {
+            return TweenPosition.Begin(this.gameObject, 1.3f, new Vector3(2, -55, 47), Space.Self);
         });
 
         return tt;
@@ -20,8 +20,8 @@ public class GameUI : MonoBehaviour {
     }
     public Task openUI()
     {
-        TaskTween tt = new TaskTween(delegate () {
-            return TweenLocalPosition.Begin(this.gameObject, 1.3f, new Vector3(2, 1, 47));
+	    TweenTask tt = new TweenTask(delegate () {
+            return TweenPosition.Begin(this.gameObject, 1.3f, new Vector3(2, 1, 47), Space.Self);
         });
 
         return tt;

@@ -4,23 +4,23 @@ namespace GDGeek{
 	public class CameraShake : MonoBehaviour {
 		public struct Parameter{
 			public Vector3 amplitude;
-			public Tween.Method methon;
+			public Easing.Method methon;
 			public int times;
 			public float time;
 
 
 		}
-		private Task move (Tween.Method method, Vector3 to, float time)
+		private Task move (Easing.Method method, Vector3 to, float time)
 		{
-			TaskTween tt = new TaskTween (delegate{
-				Tween tween = TweenLocalPosition.Begin(this.gameObject, time, to);
-				tween.method = method;
+			TweenTask tt = new TweenTask (delegate{
+				Tween tween = TweenPosition.Begin(this.gameObject, time, to, Space.Self);
+                tween.method = method;
 				return tween;
 			});
 			return tt;
 		}
 
-		private Task shake(Tween.Method method, int times, float time, Vector3 original, Vector3 border1, Vector3 border2){
+		private Task shake(Easing.Method method, int times, float time, Vector3 original, Vector3 border1, Vector3 border2){
 			TaskList tl = new TaskList ();
 			int index = 0;
 			float step = time / (float)(times);
