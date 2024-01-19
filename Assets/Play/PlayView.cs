@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GDGeek;
+using UnityEngine.Events;
 
 public class PlayView : Singleton<PlayView> {
 	//public 
@@ -9,9 +10,11 @@ public class PlayView : Singleton<PlayView> {
 	public delegate void Function(bool insert);
 
 
-	public event Function onClick;
+	//public event Function onClick;
 
-
+	[SerializeField]
+	private UnityEvent<bool> _onClick = new UnityEvent<bool>();
+	public UnityEvent<bool> onClick => _onClick;
 	public Material _material;
 	public Material _diffMaterial;
 	public GameObject _offset = null;
@@ -102,23 +105,29 @@ public class PlayView : Singleton<PlayView> {
 		filter.gameObject.layer = _back._left.gameObject.layer;
 		VoxelBuilder.FilterAddCollider (filter);
 		LogoInput input = filter.gameObject.AddComponent<LogoInput> ();
-		input.onMouseEnter += delegate() {
+		input.onMouseEnter.AddListener(() =>
+		{
 			_isEnter = true;
-		};
-		input.onMouseExit += delegate() {
+			
+		});
+		input.onMouseExit.AddListener(() =>
+		{
 			_isEnter = false;
-		};
+		});
 		_back._left.setDiff (input.gameObject);
 
 		filter.transform.localPosition = offset_;
 
 		var input2 = GameObject.Instantiate (input);
-		input2.onMouseEnter += delegate() {
+		input2.onMouseEnter.AddListener(() =>
+		{
 			_isEnter = true;
-		};
-		input2.onMouseExit += delegate() {
+		});
+	
+		input2.onMouseExit.AddListener(() =>
+		{
 			_isEnter = false;
-		};
+		});
 
 		_back._right.setDiff (input2.gameObject);
 		input2.transform.localPosition = offset_;
@@ -144,23 +153,11 @@ public class PlayView : Singleton<PlayView> {
 		filter.gameObject.transform.localPosition = offset_;
 
 	}
-    public void Start() {
-	    /*
-        if(GazeGestureManager.Instance != null) { 
-            GazeGestureManager.Instance.onClicked += delegate()
-            {
-                if (onClick != null)
-                {
-                    onClick(_isEnter);
-                }
-            };
-        }*/
-    }
+  
 	public void Update(){
 		if (Input.GetMouseButtonDown (0)) {
-			if (onClick != null) {
-				onClick (_isEnter);
-			}
+			_onClick?.Invoke(_isEnter);
+			
 		}
 	}
 

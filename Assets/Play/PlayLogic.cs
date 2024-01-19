@@ -104,7 +104,7 @@ public class PlayLogic{
 		};
 		return state;
 	}
-	public void onClick(bool insert){
+	public void doClick(bool insert){
 		if (insert) {
 			this.fsm_.post ("right");
 		} else {
@@ -116,11 +116,11 @@ public class PlayLogic{
 	public State input(){
 		State state = new State ();
 		state.onStart += delegate() {
-			PlayView.Instance.onClick += onClick;
+			PlayView.Instance.onClick.AddListener(doClick);
 		};
 		state.onOver += delegate() {
 
-			PlayView.Instance.onClick -= onClick;
+			PlayView.Instance.onClick.RemoveListener(doClick);
 		};
 		state.addAction ("timeup", "play_over");
 		state.addAction ("right", "play_right");
@@ -187,24 +187,5 @@ public class PlayLogic{
 		return state;
 	}
 
-	/*
-	 * 
-	 * public PlayView _view = null;
-	public PlayModel _model = null;
-
-	private State getLoad(){
-		State state = new State ();
-		state.onStart += delegate() {
-			var data = _model.data;
-			var diff = VoxelStruct.Different (data.first, data.second);
-			_view.setup(data.first, data.second, VoxelStruct.Create(diff,Color.white));
-		};
-		return state;
-	}
-	void Start () {
-		Debug.Log ("!!!");
-		fsm_.addState ("load", getLoad());
-		fsm_.init ("load");
-	}
-	*/
+	
 }

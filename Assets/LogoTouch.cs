@@ -16,22 +16,23 @@ public class LogoTouch : MonoBehaviour {
    // public event Function onEnter_;
     // Use this for initialization
     void Start () {
-        _input.onMouseEnter += delegate
+        _input.onMouseEnter.AddListener(() =>
         {
             time_ = 0;
             enable_ = true;
-        };
+        });
 
-        _input.onMouseClick += delegate
+        _input.onMouseClick.AddListener(() =>
         {
             _onEnter?.Invoke();
-           
-        };
+        });
+            
+       
 
-        _input.onMouseExit += delegate
+        _input.onMouseExit.AddListener(() =>
         {
             enable_ = false;
-        };
+        });
 
 
     }

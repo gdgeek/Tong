@@ -69,11 +69,11 @@ public class LogoLogic {
 		state.onOver += delegate() {
 
 			//Debug.Log("over!!!");
-			LogoView.Instance._input.onMouseClick -= doClick;
+			LogoView.Instance._input.onMouseClick.RemoveListener(doClick);// -= ;
 		};
 		state.onStart += delegate() {
 			//Debug.Log("start!!!");
-			LogoView.Instance._input.onMouseClick += doClick;
+			LogoView.Instance._input.onMouseClick.AddListener(doClick);// += doClick;
 		};
 		return state;
 	}
